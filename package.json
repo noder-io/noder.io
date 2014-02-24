@@ -1,0 +1,67 @@
+{
+  "name": "noder.io",
+  "version": "0.1.0",
+  "description": "Noder.io is a light starter toolkit to start and organize quickly a project with Node.js. Noder.io provides useful features through Node.js modules chosen for the performance and productivity gains.",
+  "main": "index.js",
+  "keywords": [
+    "noder",
+    "noder.io",
+    "toolkit",
+    "helper",
+    "framework",
+    "lib",
+    "server",
+    "node",
+    "node.js",
+    "router",
+    "express"
+  ],
+  "author": {
+    "name":"Nicolas Tallefourtane",
+    "url":"http://nicolab.net"
+  },
+  "license": "BSD-2",
+  "engines": {
+    "node": "node >= 0.10.0"
+  },
+  "dependencies": {
+    "mixing":   "~0.0.2",
+    "cjson":    "~0.3.0",
+    "debug":    "~0.7.4",
+    "winston":  "~0.7.2",
+    "lazy.js":  "~0.3.2",
+    "lodash":   "~2.4.1",
+    "underscore.string":  "~2.3.3",
+    "mout":         "~0.9.0",
+    "async":        "~0.2.10",
+    "kew":          "~0.3.3",
+    "bluebird":     "~1.0.5",
+    "validatorjs":  "~1.0.1",
+    "validator":    "~3.2.1",
+    "revalidator":  "~0.1.6",
+    "moment":       "~2.5.1",
+    "convict":      "~0.4.2",
+    "consolidate":  "~0.10.0",
+    "express":      "~3.4.8",
+    "socket.io":    "~0.9.15",
+    "cheerio":      "~0.13.1",
+    "swig":         "~1.3.2",
+    "jus-i18n":     "~0.1.2",
+    "marked":       "~0.3.1",
+    "compose":      "~0.1.2",
+    "hooker":       "~0.2.3",
+    "express-load": "~1.1.9",
+    "commander":    "~2.1.0",
+    "inquirer":     "~0.4.0",
+    "passport":     "~0.2.0"
+  },
+
+  "devDependencies": {
+    "unit.js": "*"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:noder-io/noder.io.git"
+  }
+}
