@@ -1,8 +1,12 @@
 {
   "name": "noder.io",
-  "version": "0.1.0",
+
+  "version": "0.1.1",
+
   "description": "Noder.io is a light starter toolkit to start and organize quickly a project with Node.js. Noder.io provides useful features through Node.js modules chosen for the performance and productivity gains.",
+  
   "main": "index.js",
+
   "keywords": [
     "noder",
     "noder.io",
@@ -16,14 +20,18 @@
     "router",
     "express"
   ],
+
   "author": {
     "name":"Nicolas Tallefourtane",
     "url":"http://nicolab.net"
   },
+
   "license": "BSD-2",
+
   "engines": {
     "node": "node >= 0.10.0"
   },
+
   "dependencies": {
     "mixing":   "~0.0.2",
     "cjson":    "~0.3.0",
