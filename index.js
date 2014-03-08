@@ -374,7 +374,7 @@ noder.Collection.prototype = {
       );
     }
 
-    return undefined !== this._container[key];
+    return key in this._container === true;
   },
 
   /**
