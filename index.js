@@ -25,7 +25,6 @@ var loaded = {
 
 // modules list
 var modules = {
-	'router':        './lib/router',
 	'configurator':  'convict',
 	'debug':         'debug',
 	'logger':        'winston',
@@ -45,13 +44,11 @@ var modules = {
 	'check':         'validator',
 	'moment':        'moment',
 	'engines':       'consolidate',
-	'express':       'express',
 	'socket':        'socket.io',
 	'dom':           'cheerio',
 	'swig':          'swig',
 	'lang':          'jus-i18n',
 	'markdown':      'marked',
-	'load':          'express-load',
 	'commander':     'commander',
 	'prompter':      'inquirer',
 	'passport':      'passport'
@@ -163,21 +160,6 @@ function createPropertyLazyLoader(property, required) {
  * ```
  */
 var noder = {
-
-  get app() {
-
-    if (app) {
-      return app;
-    }
-
-    app = require('./lib/application')(this);
-
-    return app;
-  },
-
-  isApp: function() {
-    return undefined !== app;
-  },
 
   /**
    * Create a collection.

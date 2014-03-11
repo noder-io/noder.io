@@ -1,3 +1,0 @@
-#!/usr/bin/env node
-
-require('unit.js/bin/test');

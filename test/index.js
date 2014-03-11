@@ -737,47 +737,4 @@ describe('Noder', function(){
     });
 
   });
-
-  describe('Application', function(){
-
-    it('isApp()', function(){
-      
-      test
-        .bool(noder.isApp())
-          .isFalse()
-
-        .if(test.httpAgent(noder.app))
-          .bool(noder.isApp())
-            .isTrue()
-      ;
-    });
-
-    it('noder.app request', function(){
-    
-      var agent;
-
-      test
-        .when(function(){
-
-          noder.app.get('/', function(req, res){
-            res.send('hello world');
-          });
-
-          agent = test.httpAgent(noder.app);
-        })
-
-        .then(function(){
-
-          test.bool(noder.isApp()).isTrue();
-          
-          test.httpAgent(noder.app)
-            .get('/')
-            .expect('x-powered-by', /noder/i)
-          ;
-
-        })
-      ;
-    });
-    
-  });
 });
