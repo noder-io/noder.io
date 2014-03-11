@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var noder     = require('noder.io');
+var fs        = require('fs');
+var path      = require('path');
+var commander = noder.commander;
+var binPath   = path.resolve('.bin');
+
+
+commander
+  .version(require('../package.json').version)
+ 
+  .option('--debug', 'Debug mode')
+
+  .option('--bins', 'List the commands files in "node_modules/.bin" directory')
+  
+  .parse(process.argv)
+;
+
+if(commander.bins){
+  if(!fs.existsSync(binPath)){
+    return null;
+  }
+
+  fs.readdirSync(binPath).forEach(function(file) {
+      console.log(file);
+  });
+}
