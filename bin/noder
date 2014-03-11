@@ -4,7 +4,7 @@ var noder     = require('noder.io');
 var fs        = require('fs');
 var path      = require('path');
 var commander = noder.commander;
-var binPath   = path.resolve('.bin');
+var binPath   = path.resolve('node_modules/.bin');
 
 
 commander
