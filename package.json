@@ -46,7 +46,7 @@
     "kew":          "~0.3.4",
     "bluebird":     "~1.0.8",
     "validatorjs":  "~1.0.1",
-    "validator":    "~3",
+    "validator":    ">= 3.5.0 < 4.0.0",
     "revalidator":  "~0.1.6",
     "moment":       "~2.5.1",
     "convict":      "~0.4.2",
@@ -64,7 +64,7 @@
   },
 
   "devDependencies": {
-    "unit.js": "~0.1.7"
+    "unit.js": ">= 0.1.6 < 1.0.0"
   },
 
   "repository": {
