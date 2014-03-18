@@ -1,5 +1,8 @@
 # Noder.io
 
+[![Actual version published on NPM](https://badge.fury.io/js/noder.io.png)](https://www.npmjs.org/package/noder.io)
+[![Dependencies](https://david-dm.org/noder-io/noder.io.png)](https://david-dm.org/noder-io/noder.io)
+
 Noder.io provides useful features through Node.js modules chosen for 
 the performance and productivity gains.
 
