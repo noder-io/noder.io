@@ -191,10 +191,10 @@
 	 * @example
 	 *   var collection = new noder.Collection();
 	 *
-	 *   collection.set('my key', 'my value');
+	 *   collection.set('keyName', 'any value');
 	 *
-	 *   // my value
-	 *   console.log(collection.get('my key'));
+	 *   // any value
+	 *   console.log(collection.get('keyName'));
 	 *
 	 *
 	 * @constructor
@@ -221,10 +221,10 @@
 	 *   // true
 	 *   console.log(collection instanceof noder.Collection);
 	 *
-	 *   collection.set('my key', 'my value');
+	 *   collection.set('keyName', 'any value');
 	 *
-	 *   // my value
-	 *   console.log(collection.get('my key'));
+	 *   // any value
+	 *   console.log(collection.get('keyName'));
 	 *
 	 * @param {object} [values] Optional values to add in the new collection.
 	 * ```js
@@ -282,9 +282,9 @@
 	 *   var noder         = require('noder.io').createNoder();
 	 *   var examplePlugin = require('./example-plugin');
 	 *
-	 *   noder.use(examplePlugin, 'my value 1', 'my value 2');
+	 *   noder.use(examplePlugin, 'any value 1', 'any value 2');
 	 *
-	 *   // displays: 'my value 1 and my value 2'
+	 *   // displays: 'any value 1 and any value 2'
 	 *   console.log(noder.$di.get('foo'));
 	 *
 	 * @param  {string|object|function} noderPlugin A noder plugin.
@@ -585,6 +585,17 @@
 	/**
 	 * Check if a given module is loaded.
 	 *
+	 * @example
+	 *  noder.$require('express');
+	 *
+	 *  // false
+	 *  console.log(noder.$require.isLoaded('express'));
+	 *
+	 *  var express = noder.express;
+	 *
+	 *  // true
+	 *  console.log(noder.$require.isLoaded('express'));
+	 *
 	 * @param  {string}  property The property name.
 	 * @return {bool} `true` if the given module is loaded, `false` otherwise.
 	 * @see Noder.$require()
@@ -650,6 +661,9 @@
 	/**
 	 * Get all keys of the collection.
 	 *
+	 * @example
+	 *   items.keys();
+	 *
 	 * @return {array} An array of keys.
 	 */
 	Collection.prototype.keys = function keys() {
@@ -658,6 +672,13 @@
 	
 	/**
 	 * Checks if an item exists
+	 *
+	 * @example
+	 *  items.set('keyName', 'any value');
+	 *
+	 *  if(items.has('keyName')) {
+	 *    console.log('has `keyName`');
+	 *  }
 	 *
 	 * @param {string} key The key of the item to check.
 	 * @return {bool} `true` if exists, `false` otherwise.
@@ -677,6 +698,17 @@
 	
 	/**
 	 * Remove an item.
+	 *
+	 * @example
+	 *  items.set('keyName', 'any value');
+	 *
+	 *  // true
+	 *  console.log(items.has('keyName'));
+	 *
+	 *  items.remove('keyName');
+	 *
+	 *  // false
+	 *  console.log(items.has('keyName'));
 	 *
 	 * @param {string} key  The key of item to remove.
 	 * @return {Collection} The current ìnstance.
@@ -725,10 +757,16 @@
 	
 	/**
 	 * Set all items of the collection.
+	 * All collection is overwritten by the given set of items.
 	 *
-	 * @param {values} values The new values of the collection,
-	 *                        all collection values is overwritten
-	 *                        by the given set of items.
+	 * @example
+	 *   items.setAll({
+	 *     a: 'value 1',
+	 *     b: 'value 2',
+	 *     c: 'value 3'
+	 *   });
+	 *
+	 * @param {values} values The new values of the collection.
 	 *
 	 * @return {Collection} The current ìnstance.
 	 * @throws {TypeError} If `values` is not an `object`.
@@ -748,6 +786,12 @@
 	
 	/**
 	 * Add all items in the collection.
+	 *
+	 * items.addAll({
+	 *     a: 'value 1',
+	 *     b: 'value 2',
+	 *     c: 'value 3'
+	 *   });
 	 *
 	 * @param {object} values The values to add.
 	 *                        The existing values are overwritten,
@@ -917,9 +961,9 @@
 	 *
 	 * @return {mixed}     The item value (if defined).
 	 * @return {mixed}     Returns `default_value` if:
-	 *                       * a default value is defined
-	 *                       * `strict` is not `truthy`
-	 *                       * the item (`key`) does not exist
+	 *  * a default value is defined
+	 *  * `strict` is not `truthy`
+	 *  * the item (`key`) does not exist
 	 *
 	 * @throws {TypeError} If `key` is not a `string`.
 	 * @throws {Error} If `strict` is `truthy` and the item does not exist.
@@ -987,9 +1031,9 @@
 	 * @return {mixed}     The item value (if defined).
 	 *
 	 * @return {mixed}     Returns `default_value` if:
-	 *                       * a default value is defined
-	 *                       * `strict` is not `truthy`
-	 *                       * the item (`key`) does not exist
+	 *  * a default value is defined
+	 *  * `strict` is not `truthy`
+	 *  * the item (`key`) does not exist
 	 *
 	 * @throws {TypeError} If `key` is not a `string`.
 	 *
@@ -1135,11 +1179,11 @@
 	 *
 	 * @example
 	 *   var fn = function() {
-	 *     return this === collection._container;
+	 *     return this === items._container;
 	 *   };
 	 *
-	 *    // true
-	 *   console.log(collection.apply(fn));
+	 *   // true
+	 *   console.log(items.apply(fn));
 	 *
 	 * @param  {function|object} bindable Function or object to call and whose
 	 *                                    the scope (`this`) will bind to container.
@@ -1240,31 +1284,23 @@
 	 * of [Collection.inject(deps, fn)](#inject).
 	 *
 	 * @example
-	 *   items.provider('paginatorProvider', ['config', 'Paginator'],
-	 *                 function(config, Paginator) {
-	 *
-	 *     var paginator = new Paginator(config.paginator);
-	 *
-	 *     // see `Collection.factory` example
-	 *     paginator.limit = config.paginator.limit;
-	 *
-	 *     paginator.links = function(items) {
-	 *       var pages = paginator.paginate(items);
-	 *       var html = [];
-	 *
-	 *        for(var page in pages) {
-	 *          html.push('<a href="articles?page='+ page +'">'+ page +'</a>');
-	 *        }
-	 *
-	 *       return html.join(', ');
-	 *     };
-	 *
-	 *     return paginator;
+	 *   items.set('hello', function() {
+	 *     return 'Hello World!';
 	 *   });
 	 *
-	 *   var paginator = items.get('PaginatorProvider');
+	 *   items.provider('sayHello', ['hello'], function(hello) {
+	 *     return hello();
+	 *   });
 	 *
-	 *   paginator.links(articles);
+	 *   // 'Hello World!'
+	 *   items.get('sayHello');
+	 *
+	 *   // or with the scope in any injector
+	 *   items.apply(function() {
+	 *
+	 *     // 'Hello World!'
+	 *     console.log(this.sayHello);
+	 *   });
 	 *
 	 * @param {string}                key   The key (provider identifier).
 	 * @param {string|array|function} deps  See [Collection.inject()](#inject).
@@ -1315,29 +1351,22 @@
 	 * of [Collection.invoke(deps, fn)](#invoke).
 	 *
 	 * @example
-	 *   items.factory('findArticlesFactory',
-	 *                ['config', 'models', 'paginator', 'errorHandler'],
-	 *                function(config, models, paginator, errorHandler) {
-	 *
-	 *     return function(callback) {
-	 *       models.Article
-	 *         .find({published: true})
-	 *         .limit(paginator.limit)
-	 *         .exec(function(err, articles) {
-	 *
-	 *           if(err) {
-	 *             return errorHandler(err);
-	 *           }
-	 *
-	 *           callback(articles, paginator.links(articles));
-	 *         });
-	 *     };
+	 *   items.set('hello', function() {
+	 *     return 'Hello World!';
 	 *   });
 	 *
-	 *   items.inject('findArticlesFactory', function(findArticles) {
-	 *     findArticles(function(articles, links) {
-	 *       console.log(articles, links);
-	 *     });
+	 *   items.factory('sayHello', ['hello'], function(hello) {
+	 *     return hello;
+	 *   });
+	 *
+	 *   // 'Hello World!'
+	 *   items.get('sayHello');
+	 *
+	 *   // or with the scope in any injector
+	 *   items.apply(function() {
+	 *
+	 *     // 'Hello World!'
+	 *     console.log(this.sayHello);
 	 *   });
 	 *
 	 * @param {string}                key   The key (factory identifier).
