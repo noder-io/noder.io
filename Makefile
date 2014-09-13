@@ -1,8 +1,9 @@
-REPORTER = spec
+browser-build: browser-build-prod browser-build-dev
 
-test:
-	@NODE_ENV=test node ./node_modules/unit.js/bin/test \
-	--reporter $(REPORTER) \
-	--recursive
+browser-build-prod:
+	@webpack src/browser.js browser/noder.js --progress --colors -p
 
-.PHONY: test
+browser-build-dev:
+	@webpack src/browser.js browser/noder-dev.js --progress --colors -d
+
+.PHONY: browser-build
