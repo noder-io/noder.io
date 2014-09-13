@@ -1,7 +1,16 @@
+/**
+ * This file is part of Noder.io.
+ *
+ * (c) Nicolas Tallefourtane <dev@nicolab.net>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code
+ * or visit http://noder.io.
+ *
+ * @author Nicolas Tallefourtane <dev@nicolab.net>
+ */
+
 'use strict';
-
-/*! Noder.io | (c) 2014 Nicolas Tallefourtane | http://noder.io */
-
 
 /*----------------------------------------------------------------------------*\
   Polyfill
