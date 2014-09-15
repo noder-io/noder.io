@@ -3,7 +3,7 @@
 [![Actual version published on NPM](https://badge.fury.io/js/noder.io.png)](https://www.npmjs.org/package/noder.io)
 
 
-Noder.io provides a lightweight and flexible core for creating a scalable API of a lib, a module, an application or a framework.
+Noder.io provides a lightweight and flexible core to create a scalable API of a lib, a module, an application or a framework.
 
 It is useful for __starting a project quickly__ with a __modular API__ ready to use.
 
