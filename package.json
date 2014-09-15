@@ -1,6 +1,6 @@
 {
   "name": "noder.io",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Noder.io provides a lightweight IOC container to build the core of a scalable API. No dependencies, works on Node.js and in the browser (only 4kb).",
   "main": "src/index.js",
   "keywords": [
