@@ -1,17 +1,17 @@
 'use strict';
 
-var plugin;
+var api;
 
 /**
  * Create `helloProvider`
  */
 function createProvider() {
 
-  plugin.$provider('helloProvider', function(name) {
+  api.$provider('helloProvider', function(name) {
 
     // get `question` if defined,
     // otherwise use the default value `How are you?`
-    return 'hello ' + name + ', ' + plugin.$di.get('question', 'How are you?');
+    return 'hello ' + name + ', ' + api.$di.get('question', 'How are you?');
   });
 }
 
@@ -21,7 +21,7 @@ function createProvider() {
 function createFactory() {
 
   // `hello` = `helloProvider`
-  plugin.$provider('helloFactory', ['helloProvider'], function(hello) {
+  api.$provider('helloFactory', ['helloProvider'], function(hello) {
     return 'I say' + hello('Noder !');
   });
 }
@@ -45,17 +45,17 @@ module.exports = function hello() {
  */
 module.exports.__noder = function helloPlugin(noder) {
 
-  plugin = noder;
+  api = noder;
 
-  plugin.$di.set('description', 'A new item from helloPlugin');
+  api.$di.set('description', 'A new item from helloPlugin');
 
   // populate `noder` with new data and new features
   createProvider();
   createFactory();
 
-  plugin.$inject('log', function(log) {
+  api.$inject('log', function(log) {
     log('helloPlugin is loaded in the API.');
   });
 
-  return this;
+  return api;
 };
