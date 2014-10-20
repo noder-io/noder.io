@@ -15,11 +15,12 @@
 /**
  * Merge object `b` in object `a`.
  *
- *     var a = { foo: 'bar' }
- *       , b = { bar: 'baz' };
+ * @example
+ *  var a = { foo: 'bar' };
+ *  var b = { bar: 'baz' };
  *
- *     utils.merge(a, b);
- *     // => { foo: 'bar', bar: 'baz' }
+ *  utils.merge(a, b);
+ *  // => { foo: 'bar', bar: 'baz' }
  *
  * @param {Object} a Object that receives the value of `b`.
  * @param {Object} b Object to merge in `a`.
@@ -37,7 +38,8 @@ module.exports.merge = function merge(a, b) {
 };
 
 /**
- * Merge recursive
+ * Merge recursive.
+ *
  * @param {object|array} obj       Object that receives the value of `from`
  * @param {...object|array} from   One or more objects to merge in `obj`.
  * @return {Object} `obj` merged
@@ -59,5 +61,6 @@ module.exports.mergeRecursive = function mergeRecursive(obj) {
       }
     }
   }
+  
   return obj;
 };

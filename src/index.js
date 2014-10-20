@@ -33,13 +33,13 @@ var loaded = {};
  *   // true
  *   console.log(noder instanceof noder.Noder);
  *
- *   noder.set('hello', '-> Hello from a.js file.');
+ *   noder.$di.set('hello', '-> Hello from a.js file.');
  *
  *   // file: b.js
  *   var noder = require('noder.io');
  *
  *   // -> Hello from a.js file.
- *   console.log(noder.get('hello'));
+ *   console.log(noder.$di.get('hello'));
  *
  * @constructor
  *
@@ -394,7 +394,7 @@ Noder.prototype.$singleton = function $singleton(key, fn) {
  * (`noder.$di._container`).
  *
  * @example
- *   noder.set('name', 'Nico');
+ *   noder.$di.set('name', 'Nico');
  *
  *   // returns 'Nico'
  *   noder.$apply(function() {
@@ -455,7 +455,9 @@ Noder.prototype.$wrap = function $wrap(value) {
  * @param {string|function} [required] The module name or the JS file path
  *                                     required to set the property value.
  *                                     Or a custom loader handler
- *                                     via a given function.
+ *                                     via a given function, the scope (`this`)
+ *                                     bind to `noder.$di._container`
+ *                                     like `noder.$apply()`.
  *
  * Note:
  *  * The `required` argument is passed to the function `require()`.
