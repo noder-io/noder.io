@@ -128,13 +128,13 @@
 	 *   // true
 	 *   console.log(noder instanceof noder.Noder);
 	 *
-	 *   noder.set('hello', '-> Hello from a.js file.');
+	 *   noder.$di.set('hello', '-> Hello from a.js file.');
 	 *
 	 *   // file: b.js
 	 *   var noder = require('noder.io');
 	 *
 	 *   // -> Hello from a.js file.
-	 *   console.log(noder.get('hello'));
+	 *   console.log(noder.$di.get('hello'));
 	 *
 	 * @constructor
 	 *
@@ -489,7 +489,7 @@
 	 * (`noder.$di._container`).
 	 *
 	 * @example
-	 *   noder.set('name', 'Nico');
+	 *   noder.$di.set('name', 'Nico');
 	 *
 	 *   // returns 'Nico'
 	 *   noder.$apply(function() {
@@ -550,7 +550,9 @@
 	 * @param {string|function} [required] The module name or the JS file path
 	 *                                     required to set the property value.
 	 *                                     Or a custom loader handler
-	 *                                     via a given function.
+	 *                                     via a given function, the scope (`this`)
+	 *                                     bind to `noder.$di._container`
+	 *                                     like `noder.$apply()`.
 	 *
 	 * Note:
 	 *  * The `required` argument is passed to the function `require()`.
@@ -1474,11 +1476,12 @@
 	/**
 	 * Merge object `b` in object `a`.
 	 *
-	 *     var a = { foo: 'bar' }
-	 *       , b = { bar: 'baz' };
+	 * @example
+	 *  var a = { foo: 'bar' };
+	 *  var b = { bar: 'baz' };
 	 *
-	 *     utils.merge(a, b);
-	 *     // => { foo: 'bar', bar: 'baz' }
+	 *  utils.merge(a, b);
+	 *  // => { foo: 'bar', bar: 'baz' }
 	 *
 	 * @param {Object} a Object that receives the value of `b`.
 	 * @param {Object} b Object to merge in `a`.
@@ -1496,7 +1499,8 @@
 	};
 	
 	/**
-	 * Merge recursive
+	 * Merge recursive.
+	 *
 	 * @param {object|array} obj       Object that receives the value of `from`
 	 * @param {...object|array} from   One or more objects to merge in `obj`.
 	 * @return {Object} `obj` merged
@@ -1518,6 +1522,7 @@
 	      }
 	    }
 	  }
+	  
 	  return obj;
 	};
 
