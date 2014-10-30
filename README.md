@@ -1,9 +1,10 @@
 # Noder.io
 
 [![Actual version published on NPM](https://badge.fury.io/js/noder.io.png)](https://www.npmjs.org/package/noder.io)
+[![npm module downloads per month](http://img.shields.io/npm/dm/noder.io.svg)](https://www.npmjs.org/package/noder.io)
 
 
-Noder.io provides a lightweight and flexible core to create a scalable API of a lib, a module, an application or a framework.
+Noder.io provides a lightweight and flexible core to create a scalable API of a lib, a module, an application or a framework. Noder.io is inspired (among others) by _Angular_ and _Pimple_.
 
 It is useful for __starting a project quickly__ with a __modular API__ ready to use.
 
@@ -14,7 +15,7 @@ Noder.io (and any object built on top of Noder.io) integrates:
   * [lazy loading](http://noder.io/guide/lazy-loading.html)
   * [plugins system easy to use](http://noder.io/guide/plugins.html)
 
-No dependencies, works on __Node.js__ and in the __browser__ (only 4kb).
+No dependencies, works on __Node.js__ and in the __browser__ (only 7kb).
 
 
 ## Quick start
