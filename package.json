@@ -1,7 +1,7 @@
 {
   "name": "noder.io",
-  "version": "1.0.3",
-  "description": "Noder.io provides a lightweight IoC container to build the core of a scalable API. No dependencies, works on Node.js and in the browser (only 4kb).",
+  "version": "1.1.0",
+  "description": "A lightweight IoC container to build the core of a scalable and modular API (inspired by Angular and Pimple). No dependencies, works on Node.js and in the browser (only 7kb).",
   "main": "src/index.js",
   "keywords": [
     "ioc",
@@ -10,7 +10,8 @@
     "toolkit",
     "framework",
     "lib",
-    "node"
+    "node",
+    "plugin"
   ],
   "author": {
     "name": "Nicolas Tallefourtane",
