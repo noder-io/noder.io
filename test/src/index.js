@@ -279,50 +279,101 @@ describe('Noder', function(){
           .object(noder['unit.js'])
             .isIdenticalTo(require('unit.js'))
       ;
+    });
 
-      it('Custom loader', function() {
+    it('Lazy loading in another object', function(){
 
-        var spy = test.spy();
+      var obj = {
+        a: undefined
+      };
 
-        test
-          .case('define a custom loader')
-            .object(noder.$require('coll', function() {
-              spy();
+      test
+        .object(noder.$require('unit', 'unit.js', obj))
+          .isIdenticalTo(noder)
+          .isInstanceOf(noder.Noder)
 
-              test
-                .object(this)
-                  .isIdenticalTo(noder.$di)
-                  .isInstanceOf(noder.Collection)
-              ;
+        .bool(noder.$require.isLoaded('unit', obj))
+            .isFalse()
 
-              return require('./collection');
-            }))
-              .isIdenticalTo(noder)
-              .isInstanceOf(noder.Noder)
+        .if(obj.unit)
+          .bool(noder.$require.isLoaded('unit', obj))
+            .isTrue()
 
-            .then('should be not loaded')
-              .bool(spy.called)
-                .isFalse()
+          .object(obj.unit)
+            .isIdenticalTo(require('unit.js'))
+      ;
+    });
 
-          .case('use the lazy loaded module')
-            .function(noder.coll)
-              .hasName('Collection')
-              .isIdenticalTo(require('./collection'))
+    it('Lazy loading in a property', function(){
 
-            .then('should be loaded with the custom loader')
-              .bool(spy.calledOnce)
+      var obj = {
+        a: {}
+      };
+
+      test
+        .object(noder.$require('unit', 'unit.js', obj.a))
+          .isIdenticalTo(noder)
+          .isInstanceOf(noder.Noder)
+
+        .bool(noder.$require.isLoaded('unit', obj.a))
+            .isFalse()
+
+        .if(obj.a.unit)
+          .bool(noder.$require.isLoaded('unit', obj.a))
+            .isTrue()
+
+          .object(obj.a.unit)
+            .isIdenticalTo(require('unit.js'))
+      ;
+    });
+
+    it('Custom loader', function() {
+
+      var spy = test.spy();
+
+      test
+        .given(noder.$di.set('customLoaderDep', true))
+        .case('define a custom loader')
+          .object(noder.$require('coll', function() {
+            spy();
+
+            test
+              .object(this)
+                .isIdenticalTo(noder.$di._container)
+
+              .bool(this.customLoaderDep)
                 .isTrue()
+            ;
 
-          .case('reuse the lazy loaded module')
-            .function(noder.coll)
-              .hasName('Collection')
-              .isIdenticalTo(require('./collection'))
+            return require('../../src/collection');
+          }))
+            .isIdenticalTo(noder)
+            .isInstanceOf(noder.Noder)
 
-            .then('should be a singleton')
-              .bool(spy.calledOnce)
-                .isTrue()
-        ;
-      });
+          .then('should be not loaded')
+            .bool(spy.called)
+              .isFalse()
+
+        .case('use the lazy loaded module')
+          .function(noder.coll)
+            .hasName('Collection')
+            .is(noder.Collection)
+            .isIdenticalTo(require('../../src/collection'))
+
+          .then('should be loaded with the custom loader')
+            .bool(spy.calledOnce)
+              .isTrue()
+
+        .case('reuse the lazy loaded module')
+          .function(noder.coll)
+            .hasName('Collection')
+            .is(noder.Collection)
+            .isIdenticalTo(require('../../src/collection'))
+
+          .then('should be a singleton')
+            .bool(spy.calledOnce)
+              .isTrue()
+      ;
     });
   });
 });

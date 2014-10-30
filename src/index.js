@@ -437,7 +437,7 @@ Noder.prototype.$wrap = function $wrap(value) {
  *
  * The property configuration is :
  *  * enumerable:   true,
- *  * configurable:   false,
+ *  * configurable: false,
  *  * writable:     false
  *
  * @example
@@ -447,6 +447,15 @@ Noder.prototype.$wrap = function $wrap(value) {
  *
  *  // Now load the `marked` module in the `markdown` property
  *  noder.markdown;
+ *
+ * @example
+ *   // Register a sub-property.
+ *   noder.models = {};
+ *
+ *   noder.$require('User', './models/user', noder.models);
+ *
+ *   // Load the `./models/user` module in `noder.models.User` property.
+ *   noder.models.User.someMethod();
  *
  * @param {string|function} property The property name
  *                                   or `required` value if the `required`
@@ -463,29 +472,49 @@ Noder.prototype.$wrap = function $wrap(value) {
  *  * The `required` argument is passed to the function `require()`.
  *  * The `required` item is only loaded the first time (singleton).
  *
+ * @param {object} [obj] The object where the property is created.
+ *                       If is not provided, it's the current instance of `Noder`.
+ *
  * @return {Noder} The current `Noder` instance.
  */
-Noder.prototype.$require = function $require(property, required) {
+Noder.prototype.$require = function $require(property, required, obj) {
 
-  Object.defineProperty(this, property, {
+  var ref;
+  var _this = this;
+
+  obj = obj || this;
+
+  Object.defineProperty(obj, property, {
 
     enumerable   : true,
     configurable : false,
 
     get: function() {
 
-      if (this.$require.isLoaded(property)) {
-        return loaded[property];
+      // most cases, faster checking
+      if (typeof ref != 'undefined') {
+        return ref;
       }
 
-      if(typeof required === 'undefined') {
+      // rare cases, ensure the modules with undefined return
+      if(_this.$require.isLoaded(property, obj)) {
+        return ref;
+      }
+
+      if(!required) {
         required = property;
       }
 
-      loaded[property] = (typeof required === 'function' ?
-        required.call(this._container) : require(required));
+      ref = (typeof required === 'function' ?
+        required.call(_this.$di._container) : require(required));
 
-      return loaded[property];
+      if(!loaded[property]) {
+        loaded[property] = [];
+      }
+
+      loaded[property].push(obj);
+
+      return ref;
     },
 
     set: function() {
@@ -513,13 +542,25 @@ Noder.prototype.$require = function $require(property, required) {
  *  // true
  *  console.log(noder.$require.isLoaded('express'));
  *
- * @param  {string}  property The property name.
+ * @param {string}  property The property name.
+ * @param {object} [obj] Object to check the property. If is not provided,
+ *                       it's the current instance of `Noder`.
  * @return {bool} `true` if the given module is loaded, `false` otherwise.
  * @see Noder.$require()
  */
-Noder.prototype.$require.isLoaded = function isLoaded(property) {
-  return (undefined !== loaded[property]);
-};
+Noder.prototype.$require.isLoaded = function isLoaded(property, obj) {
 
+  if(!obj) {
+    return loaded[property] ? true : false;
+  }
+
+  if(!loaded[property]) {
+    return false;
+  }
+
+  obj = obj || this;
+
+  return (loaded[property].indexOf(obj) !== -1);
+};
 
 module.exports = new Noder();
