@@ -19,5 +19,7 @@
   "smarttabs" : true,
   "proto"     : true,
   "expr"      : true,
-  "notypeof"  : true
+  "notypeof"  : true,
+  "laxbreak"  : true,
+  "predef"    : [ "noder" ]
 }
