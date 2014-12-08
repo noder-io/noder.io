@@ -1,7 +1,7 @@
 {
   "name": "noder.io",
-  "version": "1.1.0",
-  "description": "A lightweight IoC container to build the core of a scalable and modular API (inspired by Angular and Pimple). No dependencies, works on Node.js and in the browser (only 7kb).",
+  "version": "1.2.0",
+  "description": "A lightweight IoC container to build the core of a scalable and modular API (inspired by Angular and Pimple). No dependencies, works on Node.js and in the browser (only 2kb minified gzipped).",
   "main": "src/index.js",
   "keywords": [
     "ioc",
@@ -31,7 +31,7 @@
     "test": "mocha test"
   },
   "devDependencies": {
-    "mocha": "^1.21.4",
+    "mocha": "^2.0.1",
     "unit.js": ">= 1.0.0 < 2.0.0"
   }
 }
