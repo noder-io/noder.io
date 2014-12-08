@@ -1528,7 +1528,7 @@
 	 * @param {Object} b Object to merge in `a`.
 	 * @return {Object} `a` merged
 	 */
-	module.exports.merge = function merge(a, b) {
+	function merge(a, b) {
 	
 	  if (a && b) {
 	    for (var key in b) {
@@ -1537,7 +1537,7 @@
 	  }
 	
 	  return a;
-	};
+	}
 	
 	/**
 	 * Merge recursive.
@@ -1546,7 +1546,7 @@
 	 * @param {...object|array} from   One or more objects to merge in `obj`.
 	 * @return {Object} `obj` merged
 	 */
-	module.exports.mergeRecursive = function mergeRecursive(obj) {
+	function mergeRecursive(obj) {
 	
 	  var argLen = arguments.length;
 	
@@ -1557,15 +1557,24 @@
 	  for (var i = 1; i < argLen; i++) {
 	    for (var p in arguments[i]) {
 	      if (obj[p] && typeof obj[p] === 'object') {
-	        obj[p] = this.mergeRecursive(obj[p], arguments[i][p]);
+	        obj[p] = mergeRecursive(obj[p], arguments[i][p]);
 	      } else {
 	        obj[p] = arguments[i][p];
 	      }
 	    }
 	  }
-	  
+	
 	  return obj;
-	};
+	}
+	
+	
+	/*----------------------------------------------------------------------------*\
+	  Expose
+	\*----------------------------------------------------------------------------*/
+	
+	module.exports.merge          = merge;
+	module.exports.mergeRecursive = mergeRecursive;
+
 
 /***/ }
 /******/ ])
