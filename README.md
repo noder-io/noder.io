@@ -15,7 +15,7 @@ Noder.io (and any object built on top of Noder.io) integrates:
   * [lazy loading](http://noder.io/guide/lazy-loading.html)
   * [plugins system easy to use](http://noder.io/guide/plugins.html)
 
-No dependencies, works on __Node.js__ and in the __browser__ (only 7kb).
+No dependencies, works on __Node.js__ and in the __browser__ (only 7kb minified - 2kb gzipped).
 
 
 ## Quick start
